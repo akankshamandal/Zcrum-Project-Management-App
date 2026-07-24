@@ -7,6 +7,10 @@ import {
   TabsTrigger,
 } from "@/components/ui/tabs";
 import IssueCard from "@/components/ui/issue-card";
+import {
+  IssueStatus,
+  IssuePriority,
+} from "@prisma/client";
 
 interface UserType {
   id: string;
@@ -19,8 +23,8 @@ interface IssueType {
   id: string;
   title: string;
   description: string | null;
-  status: string;
-  priority: "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+  status: IssueStatus;
+  priority: IssuePriority;
   createdAt: Date | string;
   projectId: string;
   sprintId: string | null;

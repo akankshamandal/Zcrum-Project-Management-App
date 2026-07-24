@@ -14,6 +14,10 @@ import { useRouter } from "next/navigation";
 
 import IssueDetailsDialog from "@/components/ui/issue-details-dialog";
 import UserAvatar from "@/components/ui/user-avatar";
+import {
+  IssuePriority,
+  IssueStatus,
+} from "@prisma/client";
 
 interface UserType {
   id: string;
@@ -26,8 +30,8 @@ interface IssueType {
   id: string;
   title: string;
   description: string | null;
-  status: string;
-  priority: "LOW" | "MEDIUM" | "HIGH" | "URGENT";
+  status: IssueStatus;
+  priority: IssuePriority;
   createdAt: string | Date;
   projectId: string;
   sprintId: string | null;
