@@ -1,65 +1,131 @@
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import CompanyCarousel from "@/components/ui/company-carousel";
+import { Calendar, ChevronRight, Layout, BarChart, ArrowRight } from "lucide-react";
 import Image from "next/image";
-
+import Link from "next/link";
+import faqs from "@/data/faqs.json";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+const features = [
+  {
+    title: "Intuitive Kanban Boards",
+    description:
+      "Visualize your workflow and optimize team productivity with our easy-to-use Kanban boards.",
+    icon:Layout,
+  },
+  {
+    title: "Powerful Sprint Planning",
+    description:
+      "Plan and manage sprints effectively, ensuring your team stays focused on delivering value.",
+    icon: Calendar,
+  },
+  {
+    title: "Comprehensive Reporting",
+    description:
+      "Gain insights into your team's performance with detailed, customizable reports and analytics.",
+    icon: BarChart,
+  },
+];
 export default function Home() {
-  return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
+  return (      
+      <div className="min-h-screen">
+        {/*Hero Section*/}
+        <section className="container mx-auto py-20 text-center">
+          <h1 className="text-6xl sm:text-7xl lg:text-8xl font-extrabold gradient-title pb-6 flex flex-col">
+            StreamLine Your Workflow<br/>
+            <span className="flex mx-auto gap-3 sm:gap-4 items-center">
+              with {" "}
+              <Image
+               src={"/logo2.png"}
+            alt="Zcrum Logo"
+            width={400}
+            height={80}
+            className="h-14 sm:h-24 w-auto object-contain"
+              />
+            </span>
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+          <p className="text-xl text-gray-300 mb-10 max-w-3xl mx-auto">Empower Your Team with our intuitive project management solution.</p>
+          <Link href='/onboarding'>
+            <Button size="lg" className="mr-4">
+              Get Started <ChevronRight size={18}>
+              </ChevronRight>
+              </Button>
+          </Link>
+          <Link href='#features'>
+            <Button size="lg" variant="outline" className="mr-4">Learn More <ChevronRight size={18} className="ml-1">
+              </ChevronRight>
+              </Button>
+          </Link>
+        </section>
+        <section id="features" className="bg-gray-900 py-20 px-5">
+          <div className="container mx-auto">
+            <h3 className="text-3xl font-bold mb-12 text-center">
+              Key Features
+            </h3>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              {features.map((feature, index)=>{
+                return(
+                <Card key={index} className="bg-gray-800">
+                  <CardContent className="pt-6">
+                    <feature.icon className="h-12 w-12 mb-4 text-blue-300" />
+                    <h4 className="text-xl font-semibold mb-2">{feature.title}</h4>
+                    <h4><p className="text-gray-300">{feature.description}</p></h4>
+                  </CardContent>
+                </Card>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+        <section className="py-20">
+          <div className="container mx-auto">
+            <h3 className="text-3xl font-bold mb-12 text-center">
+              Trusted by Industry Leaders
+            </h3>
+            <CompanyCarousel/>
+          </div>
+        </section>
+        <section className="bg-gray-800 py-20 px-5">
+          <div className="container mx-auto">
+            <h3 className="text-3xl font-bold mb-10 text-center">
+              Frequently Asked Questions
+            </h3>
+            <Accordion defaultValue={["item-1"]}>
+              {faqs.map((faq, index) => (
+                <AccordionItem  key={index} value={`item-${index}`}>
+                  <AccordionTrigger>
+                    <div className="flex items-center">
+                      <span className="mr-2">•</span>
+                      <span>{faq.question}</span>
+                    </div>
+                </AccordionTrigger>
+                    <AccordionContent>{faq.answer}</AccordionContent>
+                </AccordionItem>
+              ))}
+  
+            </Accordion>
+          </div>
+        </section>
+        <section className="py-20 text-center px-5">
+          <div className="container mx-auto">
+            <h3 className="text-3xl font-bold mb-6">
+              Ready to Transform Your Workflow?
+            </h3>
+            <p className="text-xl mb-12">
+              Join thousands of teams already using ZCRUM to streamline their
+              projects and boost productivity.
+            </p>
+            <Link href="/onboarding">
+            <Button size="lg" className="animate-bounce">Start For Free<ArrowRight className="ml-2 h-5 w-5"/></Button>
+            </Link>
+          </div>
+        </section>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+    
   );
 }
