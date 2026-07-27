@@ -13,7 +13,7 @@ const Header = async () => {
       <nav className="py-6 px-4 flex justify-between items-center">
         <Link href="/">
           <Image
-            src="/Logo2.png"
+            src="/logo2.png"
             alt="Zcrum Logo"
             width={200}
             height={56}
